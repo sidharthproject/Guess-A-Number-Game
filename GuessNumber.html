@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        background-color: #212121;
+    }
+    .content{
+        
+        background: linear-gradient(rgb(235, 164, 12),rgb(177, 104, 211));
+        border: 2px solid gray;
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+     
+        align-items: center;
+        width: 555px;
+        border-radius: 20px;
+
+    }
+    h1{
+        color: #212121;
+        font-weight: bolder;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border: 4px solid #212121;
+        border-radius: 20px;
+    padding: 10px;  
+    }
+    input{
+color: #212121;
+font-weight: bolder;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+border-radius:10px ;
+border-style: none;
+padding: 10px;
+font-size: 15px;
+outline: none;
+background-color:rgb(204, 196, 196) ;
+
+    }
+    #container{
+        margin-top: 70px;
+    }
+    #checkNumber{
+        color: white;
+        font-weight: bolder;
+        font-size: 15px;
+        background: linear-gradient(rgb(97, 6, 150),rgb(30, 139, 158));
+        padding: 10px;
+        outline: none;
+        border-radius: 20px;
+        border-style: none;
+    }
+    #button2{
+        color: white;
+        font-weight: bolder;
+        font-size: 15px;
+        background: linear-gradient(rgb(247, 0, 42),rgb(150, 16, 240));
+        padding: 10px;
+        outline: none;
+        border-radius: 20px;
+        border-style: none;     
+      margin-inline: auto;
+    }
+    #message{
+        color: #ff0000;
+        font-size:35px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: 800;
+    -webkit-text-stroke:2px #212121;
+        
+    }
+    .para1{
+        color: rgb(22, 6, 94);
+        font-weight: bold;
+        font-size: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    #Previous-guesses{
+        color: #0cf8e4;
+    }
+    .para2{
+        color:rgb(42, 3, 87);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bolder;
+        font-size: 20px;
+    }
+    #Remining-guesses{
+        color: #00ff00;
+    }
+    
+    </style>
+
+<body>
+    
+
+   <div class="content">
+
+    <h1>
+      Play  Guess A Number Between 1 To 100  Game :
+    </h1>
+    <p id  = "GameOver"></p>
+    <div id = "container">
+    <input type="text" placeholder="Guess a number">
+    <button id="checkNumber">Check</button>
+
+    <p id="message"></p>
+
+    <p class="para1">Your Previous guess Number Are: <span id="Previous-guesses"></span></p>
+    <p class="para2">Remining Guesses: <span id="Remining-guesses">10</span></p>
+     </div>
+    <button type="button" id="button2">Start A New Game</button> 
+    
+</div> 
+    <script>
+
+    let randomNumber =Math.floor(Math.random()*100+1)
+    let value 
+    console.log(randomNumber);
+let input = document.querySelector('input')
+let message = document.getElementById('message')
+
+let button = document.getElementById('checkNumber')
+
+let PVgueees = document.getElementById('Previous-guesses')
+
+let RMguess = document.getElementById('Remining-guesses')
+
+
+
+document.getElementById('button2').style.display = 'none'
+document.getElementById('GameOver').style.display='none' 
+
+ button.addEventListener('click',function(){
+if(input.value >100 || input.value<0 ){
+    message.innerHTML='Your Guess between 1 to 100'
+
+   
+
+}
+else if ( isNaN(input.value)) {
+message.innerHTML = 'Please Guess A Valid Number '
+} 
+
+else if(input.value==randomNumber)  {
+   message.innerHTML = "You Guess the Correct number"
+   input.value  =' '
+   
+
+    document.getElementById('button2').style.display = 'block'
+ 
+}
+else if(input.value>randomNumber){
+    message.innerHTML='your guess is above the Random Number'
+
+}
+else if(input.value<randomNumber){
+   message.innerHTML='your guess is below the Random Number' 
+}
+
+
+
+
+ })
+
+
+ button.addEventListener('click',function(){
+
+PVgueees.innerHTML +=`${input.value}  `
+
+
+ })
+
+
+let gesss = 10
+ button.addEventListener('click', function(){
+RMguess.innerHTML = --gesss
+
+
+ if(gesss ==0){
+
+document.getElementById('container').style.display ='none'
+document.getElementById('GameOver').style.display='block'
+   document.getElementById('GameOver').innerHTML = `GAME OVER <br> Your Number was ${randomNumber}` 
+  
+   document.getElementById('GameOver').style.color = '#212121'
+   document.getElementById('GameOver').style.fontSize = '40px'
+   document.getElementById('GameOver').style.fontWeight = '800'
+   document.getElementById('GameOver').style.transform = 'scale(1.5)'
+   document.getElementById('GameOver').style.transition = 'all  2s'
+  
+    document.getElementById('button2').style.display = 'block'
+ 
+}
+ else if(gesss == 3 || gesss ==  2|| gesss1 == 1){
+RMguess.style.color = 'red'
+ }
+
+ })
+
+ 
+ document.getElementById('button2').addEventListener('click',function(){
+    document.getElementById('container').style.display ='block'
+    document.getElementById('GameOver').style.display='none'
+    document.getElementById('button2').style.display='none'
+
+   
+
+    input.value = ''
+    randomNumber =Math.floor(Math.random()*100+1)
+    PVgueees.innerHTML = ' '
+    gesss= 11
+    RMguess.innerHTML = --gesss
+    message.innerHTML = ' '
+    RMguess.style.color = '#00ff00'
+  if(gesss == 3 || gesss ==  2|| gesss1 == 1){
+RMguess.style.color = 'red'
+ }
+ })
+
+    </script>
+</body>
+</html>
